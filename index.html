@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Flowchart Generator</title>
+  <script src="./node_modules/rita/dist/rita.js"></script>
+  <script src="./node_modules/mermaid/dist/mermaid.js"></script>
+</head>
+
+<body>
+  <h1>Flowchart Generator</h1>
+
+  <button onClick="window.location.reload();">Another</button>
+
+  <pre class="mermaid" id="mermaid">
+  </pre>
+
+  <script>
+    const rita = RiTa
+    const ele = document.getElementById('mermaid')
+
+    let noun1 = rita.randomWord({ pos: "nns" });
+    let verb = rita.randomWord({ pos: "vbg" });
+    let noun2 = rita.randomWord({ pos: "nn" });
+    let noun3 = rita.randomWord({ pos: "nn" });
+
+    console.log(`${noun1} -> ${verb}? -> ${noun2} -> ${noun3}`)
+
+    let mermaidString = `
+    graph LR
+      A[${noun1}]
+      B{${verb}?}
+      C[${noun2}]
+      D[${noun3}]
+      A --> B
+      B -->|Yes| C
+      B -->|No| D
+    `
+
+    ele.innerHTML = mermaidString
+  </script>
+</body>
+
+</html>
